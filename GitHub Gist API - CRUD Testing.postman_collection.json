@@ -1,0 +1,503 @@
+{
+  "info": {
+    "_postman_id": "e221f622-3a58-424c-ad4b-d34928099f16",
+    "name": "GitHub Gist API - CRUD Testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50035569",
+    "_collection_link": "https://go.postman.co/collection/50035569-e221f622-3a58-424c-ad4b-d34928099f16?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Positive Testing",
+      "item": [
+        {
+          "name": "Create Repo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\npm.test(\"Response time is less than 8000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(8000);\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{github_personal_access_token_01je}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"API-Testing-Repo\",\r\n    \"description\": \"Repository for Postman API testing\",\r\n    \"private\": false,\r\n    \"has_issues\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.github.com/user/repos",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "user",
+                "repos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Repo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response time is less than 5000msms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{github_personal_access_token_01je}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing-Repo",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing-Repo"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Patch Perform",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response time is less than 5000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{github_personal_access_token_01je}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"description\": \"Updated Repository for Postman API testing\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing-Repo",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing-Repo"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New File in Repo and Put Perform",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Response time is less than 5000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{github_personal_access_token_01je}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"message\": \"first file via Postman\",\r\n  \"content\": \"SGVsbG8gV29ybGQh\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing-Repo/contents/hello.txt",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing-Repo",
+                "contents",
+                "hello.txt"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get File and Fetch SHA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response time is less than 5000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing-Repo/contents/hello.txt",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing-Repo",
+                "contents",
+                "hello.txt"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response time is less than 5000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{github_personal_access_token_01je}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"message\":\"hello.txt deleted\",\r\n    \"sha\":\"c57eff55ebc0c54973903af5f72bac72762cf4f4\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing-Repo/contents/hello.txt",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing-Repo",
+                "contents",
+                "hello.txt"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Negetive Testing",
+      "item": [
+        {
+          "name": "Create Repo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 401\", function () {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Response time is less than 5000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(5000);\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"New-API-Testing-Repo\",\r\n    \"description\": \"Repository for Postman API testing\",\r\n    \"private\": false,\r\n    \"has_issues\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.github.com/user/repos",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "user",
+                "repos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n\r\npm.test(\"Response time is less than 5000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n\r\npm.test(\"Response time is less than 5000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{github_personal_access_token_01je}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Updated-Repo-Name\",\r\n    \"description\": \"Testing negative patch request\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\npm.test(\"Response time is less than 5000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(5000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{github_personal_access_token_01je}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://api.github.com/repos/yash22002/API-Testing",
+              "protocol": "https",
+              "host": [
+                "api",
+                "github",
+                "com"
+              ],
+              "path": [
+                "repos",
+                "yash22002",
+                "API-Testing"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{github_personal_access_token_01je}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "github_finegrained_personal_access_token_08or",
+      "secret": true
+    },
+    {
+      "key": "github_finegrained_personal_access_token_0emh",
+      "secret": true
+    },
+    {
+      "key": "github_personal_access_token_01je",
+      "secret": true
+    }
+  ]
+}
